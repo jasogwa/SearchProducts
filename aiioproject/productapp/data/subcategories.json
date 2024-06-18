@@ -1,0 +1,14 @@
+{
+    "subcatergories":[
+        {"productId":1,"subCategoryId":1,"subCategoryName":"Bearings"},
+        {"productId":1,"subCategoryId":2,"subCategoryName":"Current Collectors"},
+        {"productId":1,"subCategoryId":3,"subCategoryName":"Fans and Fan impellers"},
+        {"productId":1,"subCategoryId":4,"subCategoryName":"Insulators"},
+        {"productId":1,"subCategoryId":5,"subCategoryName":"Rotars and Stators"},
+        {"productId":2,"subCategoryId":6,"subCategoryName":"Bearings"},
+        {"productId":2,"subCategoryId":7,"subCategoryName":"Current Collectors"},
+        {"productId":2,"subCategoryId":8,"subCategoryName":"Fans and Fan impellers"},
+        {"productId":2,"subCategoryId":9,"subCategoryName":"Insulators"},
+        {"productId":2,"subCategoryId":10,"subCategoryName":"Rotars and Stators"}
+    ]
+}

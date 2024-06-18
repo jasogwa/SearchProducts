@@ -1,0 +1,24 @@
+{
+    "subproducts":[
+        {"subCategoryId":1,"subProductId":1,"subProductName":"Blue Collectors"},
+        {"subCategoryId":1,"subProductId":2,"subProductName":"Red Collectors"},
+        {"subCategoryId":2,"subProductId":3,"subProductName":"Yellow Collectors"},
+        {"subCategoryId":2,"subProductId":4,"subProductName":"White Collectors"},
+        {"subCategoryId":3,"subProductId":5,"subProductName":"Black Collectors"},
+        {"subCategoryId":3,"subProductId":6,"subProductName":"Green Collectors"},
+        {"subCategoryId":4,"subProductId":7,"subProductName":"Orange Collectors"},
+        {"subCategoryId":4,"subProductId":8,"subProductName":"Purple Collectors"},
+        {"subCategoryId":5,"subProductId":9,"subProductName":"Wheat Collectors"},
+        {"subCategoryId":5,"subProductId":10,"subProductName":"Current Collectors"},
+        {"subCategoryId":6,"subProductId":11,"subProductName":"Blue Collectors"},
+        {"subCategoryId":6,"subProductId":12,"subProductName":"Red Collectors"},
+        {"subCategoryId":7,"subProductId":13,"subProductName":"Yellow Collectors"},
+        {"subCategoryId":7,"subProductId":14,"subProductName":"White Collectors"},
+        {"subCategoryId":8,"subProductId":15,"subProductName":"Black Collectors"},
+        {"subCategoryId":8,"subProductId":16,"subProductName":"Green Collectors"},
+        {"subCategoryId":9,"subProductId":17,"subProductName":"Orange Collectors"},
+        {"subCategoryId":9,"subProductId":18,"subProductName":"Purple Collectors"},
+        {"subCategoryId":10,"subProductId":19,"subProductName":"Wheat Collectors"},
+        {"subCategoryId":10,"subProductId":20,"subProductName":"Current Collectors"}
+    ]
+}
