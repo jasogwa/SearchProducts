@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AiioappConfig(AppConfig):
+class ProductappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'aiioapp'
+    name = 'productapp'
