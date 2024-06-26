@@ -3,6 +3,7 @@
 ## Required!
 
 * Node : Recommended node version: 16+
+* Python
 * Django
 
 
@@ -21,4 +22,4 @@
 
 # Run
 
-*   ``Open : http://localhost:5173/  on your browser``
+*   ``Open : http://localhost:5500/  on your browser``
