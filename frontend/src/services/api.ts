@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AddSubProduct, SubProduct } from '../types';
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
 	const response = await axios.get(`${API_URL}/products/`);
