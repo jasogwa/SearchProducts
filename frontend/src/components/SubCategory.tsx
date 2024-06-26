@@ -1,6 +1,18 @@
+// react import
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useFormik } from 'formik';
+
+// project import
+import { subProductValidationSchema } from '../validation/validationSchema';
+import { addNewSubProduct } from '../slices/productsSlice';
 import { RootState } from '../store';
+import { selectSubProductsBySubCategoryId } from '../selectors';
+import { createSubProduct, fetchAllSubProducts } from '../services/api';
+import StyledButton from './StyledButton';
+import CancelButton from './CancelButton';
+
+// material ui
 import {
 	List,
 	ListItem,
@@ -17,13 +29,6 @@ import {
 	DialogTitle,
 	Dialog
 } from '@mui/material';
-import { selectSubProductsBySubCategoryId } from '../selectors';
-import { createSubProduct, fetchAllSubProducts } from '../services/api';
-import { addNewSubProduct } from '../slices/productsSlice';
-import { useFormik } from 'formik';
-import { subProductValidationSchema } from '../validation/validationSchema';
-import StyledButton from './StyledButton';
-import CancelButton from './CancelButton';
 
 interface SubCategoryProps {
 	subCategoryId: number;
@@ -59,7 +64,10 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
 	const filteredSubProducts = useMemo(() => {
-		return subProducts.filter((subProduct) => subProduct.subProductName.toLowerCase().includes(subProductSearchTerm.toLowerCase()));
+		return subProducts.filter(
+			(subProduct) => subProduct.subProductName.toLowerCase()
+				.includes(subProductSearchTerm.toLowerCase())
+		);
 	}, [subProducts, subProductSearchTerm]);
 
 	const handleSubProductSelect = useCallback((subProductId: number) => {
@@ -71,7 +79,9 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 
 	useEffect(() => {
 		if (!isSelected) {
-			setSelectedSubProducts((prev) => prev.filter((id) => !subProducts.map((subProduct) => subProduct.subProductId).includes(id)));
+			setSelectedSubProducts((prev) => prev.filter(
+				(id) => !subProducts.map((subProduct) => subProduct.subProductId).includes(id))
+			);
 		}
 	}, [isSelected, setSelectedSubProducts, subProducts]);
 
@@ -160,7 +170,7 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 							color="text.secondary"
 							gutterBottom
 						>
-							Select Sub-Products
+							Select Sub Products
 						</Typography>
 					</div>
 					<CardContent sx={{ background: '#e9e9e9' }}>

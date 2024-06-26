@@ -1,4 +1,7 @@
+// react import
 import { configureStore } from '@reduxjs/toolkit';
+
+// project import
 import productsReducer from '../slices/productsSlice';
 
 const store = configureStore({

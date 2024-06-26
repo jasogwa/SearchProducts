@@ -1,8 +1,19 @@
+// react import
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+// project import
 import { RootState, AppDispatch } from '../store';
-import { fetchProducts, fetchSubCategories, fetchSubProducts } from '../services/api';
+import {
+	fetchProducts,
+	fetchSubCategories,
+	fetchSubProducts
+} from '../services/api';
 import Product from './Product';
+import StyledButton from './StyledButton';
+import CancelButton from './CancelButton';
+
+// material ui
 import {
 	Container,
 	Typography,
@@ -18,14 +29,14 @@ import {
 	CardContent,
 	Box
 } from '@mui/material';
-import StyledButton from './StyledButton';
-import CancelButton from './CancelButton';
+
 
 const ProductList: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const products = useSelector((state: RootState) => state.products.products);
 	const subCategories = useSelector((state: RootState) => state.products.subCategories);
 	const subProducts = useSelector((state: RootState) => state.products.subProducts);
+
 	const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
 	const [selectedSubCategories, setSelectedSubCategories] = useState<number[]>([]);
 	const [selectedSubProducts, setSelectedSubProducts] = useState<number[]>([]);
@@ -46,7 +57,9 @@ const ProductList: React.FC = () => {
 	};
 
 	const selectedProductName = useMemo(() => {
-		const selectedProduct = products.find((product) => product.productId === selectedProductId);
+		const selectedProduct = products.find(
+			(product) => product.productId === selectedProductId
+		);
 		return selectedProduct ? selectedProduct.productName : 'None';
 	}, [products, selectedProductId]);
 
@@ -59,8 +72,10 @@ const ProductList: React.FC = () => {
 	}, [selectedSubCategories, subCategories]);
 
 	const selectedSubProductNames = useMemo(() => {
-		return selectedSubProducts.flatMap((subProductId) =>
-			subProducts.filter((subProduct) => subProduct.subProductId === subProductId).map((subProduct) => subProduct.subProductName)
+		return selectedSubProducts.flatMap(
+			(subProductId) => subProducts.filter(
+				(subProduct) => subProduct.subProductId === subProductId
+			).map((subProduct) => subProduct.subProductName)
 		);
 	}, [selectedSubProducts, subProducts]);
 
@@ -82,7 +97,14 @@ const ProductList: React.FC = () => {
 						marginBottom: '16px'
 					}}
 				>
-					<Typography variant="h5" gutterBottom style={{ margin: 'auto', color: '#fff' }}>
+					<Typography
+						variant="h5"
+						gutterBottom
+						style={{
+							margin: 'auto',
+							color: '#fff'
+						}}
+					>
 						Products
 					</Typography>
 					<StyledButton
@@ -119,26 +141,51 @@ const ProductList: React.FC = () => {
 							/>
 						))}
 					</Card>
-					<Dialog open={isDialogOpen} onClose={handleDialogClose} fullWidth maxWidth="sm">
-						<DialogTitle sx={{ background: '#ebebeb' }}>Selected Items</DialogTitle>
+					<Dialog
+						open={isDialogOpen}
+						onClose={handleDialogClose}
+						fullWidth maxWidth="sm"
+					>
+						<DialogTitle
+							sx={{background: '#ebebeb'}}
+						>
+							Selected Items
+						</DialogTitle>
 						<DialogContent>
 							<List>
 								<ListItem>
-									<ListItemText primary="Products" secondary={selectedProductName} />
+									<ListItemText primary="Products"
+										secondary={selectedProductName}
+									/>
 								</ListItem>
 								<ListItem>
-									<ListItemText primary="Sub Categories" secondary={selectedSubCategoryNames.join(', ')} />
+									<ListItemText primary="Sub Categories"
+										secondary={selectedSubCategoryNames.join(', ')}
+									/>
 								</ListItem>
 								<ListItem>
-									<ListItemText primary="Sub Products" secondary={selectedSubProductNames.join(', ')} />
+									<ListItemText primary="Sub Products"
+										secondary={selectedSubProductNames.join(', ')}
+									/>
 								</ListItem>
 							</List>
 						</DialogContent>
-						<DialogActions sx={{ background: '#ebebeb', display: 'flex', justifyContent: 'space-between' }}>
+						<DialogActions
+							sx={{
+								background: '#ebebeb',
+								display: 'flex',
+								justifyContent: 'space-between'
+							}}>
 							<Box sx={{ display: 'flex', flexGrow: 1 }}>
-								<CancelButton onClick={handleDialogClose}>Close</CancelButton>
+								<CancelButton
+									onClick={handleDialogClose}>Close
+								</CancelButton>
 							</Box>
-							<Box sx={{ display: 'flex', justifyContent: 'flex-end', flexGrow: 1 }}>
+							<Box sx={{
+								display: 'flex',
+								justifyContent: 'flex-end',
+								flexGrow: 1
+							}}>
 								<StyledButton>Save</StyledButton>
 							</Box>
 						</DialogActions>

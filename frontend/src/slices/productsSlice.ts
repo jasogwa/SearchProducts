@@ -1,4 +1,7 @@
+// react import
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+// project import
 import { Product, SubCategory, SubProduct, AddSubProduct } from '../types';
 import { fetchProducts, fetchSubCategories, fetchSubProducts } from '../services/api';
 

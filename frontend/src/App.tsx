@@ -1,9 +1,15 @@
+// react import
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './store';
-import ProductList from './components/ProductList';
+
+// material-ui
 import { Container, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+// project import
+import store from './store';
+import ProductList from './components/ProductList';
+
 
 const theme = createTheme();
 
