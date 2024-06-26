@@ -1,9 +1,10 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { Card, CardContent, Typography, Checkbox, Collapse, List, TextField, CardActions, Button, ListItem } from '@mui/material';
+import { Card, CardContent, Typography, Checkbox, Collapse, List, TextField, CardActions, ListItem } from '@mui/material';
 import SubCategory from './SubCategory';
 import { selectSubCategoriesByProductId } from '../selectors';
+import StyledButton from './StyledButton';
 
 interface ProductProps {
 	productId: number;
@@ -165,9 +166,9 @@ const Product: React.FC<ProductProps> = ({
 							</List>
 						</CardContent>
 						<CardActions style={{ justifyContent: 'center' }}>
-							<Button variant="outlined" size="small" style={{ background: '#ebebeb', transition: 'background-color 0.3s ease' }}>
+							<StyledButton variant="contained" color="primary">
 								+ Add Sub-Category
-							</Button>
+							</StyledButton>
 						</CardActions>
 					</Card>
 				</Collapse>

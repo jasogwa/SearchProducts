@@ -12,7 +12,6 @@ import {
 	Typography,
 	CardContent,
 	CardActions,
-	Button,
 	DialogContent,
 	DialogActions,
 	DialogTitle,
@@ -23,6 +22,8 @@ import { createSubProduct, fetchAllSubProducts } from '../services/api';
 import { addNewSubProduct } from '../slices/productsSlice';
 import { useFormik } from 'formik';
 import { subProductValidationSchema } from '../validation/validationSchema';
+import StyledButton from './StyledButton';
+import CancelButton from './CancelButton';
 
 interface SubCategoryProps {
 	subCategoryId: number;
@@ -56,7 +57,6 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 	const [subProducts, setSubProducts] = useState<SubProduct[]>(subProductsFromRedux);
 	const [subProductSearchTerm, setSubProductSearchTerm] = useState('');
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
-	//const [newSubProductName, setNewSubProductName] = useState('');
 
 	const filteredSubProducts = useMemo(() => {
 		return subProducts.filter((subProduct) => subProduct.subProductName.toLowerCase().includes(subProductSearchTerm.toLowerCase()));
@@ -91,10 +91,6 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 	const handleDialogClose = () => {
 		setIsDialogOpen(false);
 	};
-
-	/*const handleNewSubProductNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setNewSubProductName(e.target.value);
-	};*/
 
 	const formik = useFormik({
 		initialValues: {
@@ -212,14 +208,7 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 						</List>
 					</CardContent>
 					<CardActions style={{ justifyContent: 'center' }}>
-						<Button
-							variant="outlined"
-							size="small"
-							style={{ background: '#ebebeb', transition: 'background-color 0.3s ease' }}
-							onClick={handleDialogOpen}
-						>
-							+ Add Sub-Product
-						</Button>
+						<StyledButton onClick={handleDialogOpen}>+ Add Sub-Product</StyledButton>
 					</CardActions>
 				</Card>
 			</Collapse>
@@ -242,12 +231,8 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 					</form>
 				</DialogContent>
 				<DialogActions sx={{ background: '#ebebeb', display: 'flex', justifyContent: 'space-between' }}>
-					<Button onClick={handleDialogClose} color="primary">
-						Cancel
-					</Button>
-					<Button onClick={formik.submitForm} color="primary">
-						Add
-					</Button>
+					<CancelButton onClick={handleDialogClose}>Cancel</CancelButton>
+					<StyledButton onClick={formik.submitForm}>Add</StyledButton>
 				</DialogActions>
 			</Dialog>
 		</div>

@@ -6,7 +6,6 @@ import Product from './Product';
 import {
 	Container,
 	Typography,
-	Button,
 	Dialog,
 	DialogTitle,
 	DialogContent,
@@ -19,6 +18,8 @@ import {
 	CardContent,
 	Box
 } from '@mui/material';
+import StyledButton from './StyledButton';
+import CancelButton from './CancelButton';
 
 const ProductList: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -84,19 +85,15 @@ const ProductList: React.FC = () => {
 					<Typography variant="h5" gutterBottom style={{ margin: 'auto', color: '#fff' }}>
 						Products
 					</Typography>
-					<Button
-						variant="outlined"
-						color="primary"
-						onClick={handleDoneClick}
+					<StyledButton
 						style={{
-							background: '#ebebeb',
-							transition: 'background-color 0.3s ease',
-							marginRight: '2px',
-							marginTop: '6px'
+							marginRight: '15px',
+							marginTop: '7px'
 						}}
+						onClick={handleDoneClick}
 					>
 						Done
-					</Button>
+					</StyledButton>
 				</div>
 				<CardContent style={{ background: '#f7f7f7' }}>
 					<Card
@@ -139,20 +136,16 @@ const ProductList: React.FC = () => {
 						</DialogContent>
 						<DialogActions sx={{ background: '#ebebeb', display: 'flex', justifyContent: 'space-between' }}>
 							<Box sx={{ display: 'flex', flexGrow: 1 }}>
-								<Button onClick={handleDialogClose} color="primary">
-									Close
-								</Button>
+								<CancelButton onClick={handleDialogClose}>Close</CancelButton>
 							</Box>
 							<Box sx={{ display: 'flex', justifyContent: 'flex-end', flexGrow: 1 }}>
-								<Button color="primary">Save</Button>
+								<StyledButton>Save</StyledButton>
 							</Box>
 						</DialogActions>
 					</Dialog>
 				</CardContent>
 				<CardActions style={{ justifyContent: 'center' }}>
-					<Button variant="outlined" size="small" style={{ background: '#ebebeb', transition: 'background-color 0.3s ease' }}>
-						+ Add Product
-					</Button>
+					<StyledButton>+ Add Product</StyledButton>
 				</CardActions>
 			</Card>
 		</Container>
