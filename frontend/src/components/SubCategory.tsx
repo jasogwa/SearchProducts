@@ -21,6 +21,8 @@ import {
 import { selectSubProductsBySubCategoryId } from '../selectors';
 import { createSubProduct, fetchAllSubProducts } from '../services/api';
 import { addNewSubProduct } from '../slices/productsSlice';
+import { useFormik } from 'formik';
+import { subProductValidationSchema } from '../validation/validationSchema';
 
 interface SubCategoryProps {
 	subCategoryId: number;
@@ -54,7 +56,7 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 	const [subProducts, setSubProducts] = useState<SubProduct[]>(subProductsFromRedux);
 	const [subProductSearchTerm, setSubProductSearchTerm] = useState('');
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
-	const [newSubProductName, setNewSubProductName] = useState('');
+	//const [newSubProductName, setNewSubProductName] = useState('');
 
 	const filteredSubProducts = useMemo(() => {
 		return subProducts.filter((subProduct) => subProduct.subProductName.toLowerCase().includes(subProductSearchTerm.toLowerCase()));
@@ -90,24 +92,30 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 		setIsDialogOpen(false);
 	};
 
-	const handleNewSubProductNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	/*const handleNewSubProductNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNewSubProductName(e.target.value);
-	};
+	};*/
 
-	const handleAddSubProduct = async () => {
-		const newSubProduct = {
-			subCategory: subCategoryId,
-			subProductName: newSubProductName
-		};
-		try {
-			const response = await createSubProduct(newSubProduct);
-			setSubProducts((prevSubProducts) => [...prevSubProducts, response]);
-			dispatch(addNewSubProduct(response));
-		} catch (error) {
-			console.error('Failed to add sub-product:', error);
+	const formik = useFormik({
+		initialValues: {
+			newSubProductName: ''
+		},
+		validationSchema: subProductValidationSchema,
+		onSubmit: async (values) => {
+			const newSubProduct = {
+				subCategory: subCategoryId,
+				subProductName: values.newSubProductName
+			};
+			try {
+				const response = await createSubProduct(newSubProduct);
+				setSubProducts((prevSubProducts) => [...prevSubProducts, response]);
+				dispatch(addNewSubProduct(response));
+			} catch (error) {
+				console.error('Failed to add sub-product:', error);
+			}
+			handleDialogClose();
 		}
-		handleDialogClose();
-	};
+	});
 
 	useEffect(() => {
 		const fetchSubProducts = async () => {
@@ -215,23 +223,29 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 					</CardActions>
 				</Card>
 			</Collapse>
-			<Dialog open={isDialogOpen} onClose={handleDialogClose}>
-				<DialogTitle>Add New Sub-Product</DialogTitle>
+			<Dialog open={isDialogOpen} onClose={handleDialogClose} fullWidth maxWidth="sm">
+				<DialogTitle sx={{ background: '#ebebeb' }}>Add New Sub Product</DialogTitle>
 				<DialogContent>
-					<TextField
-						autoFocus
-						margin="dense"
-						label="Sub-Product Name"
-						fullWidth
-						value={newSubProductName}
-						onChange={handleNewSubProductNameChange}
-					/>
+					<form onSubmit={formik.handleSubmit}>
+						<TextField
+							autoFocus
+							margin="dense"
+							label="Sub Product Name"
+							fullWidth
+							id="newSubProductName"
+							name="newSubProductName"
+							value={formik.values.newSubProductName}
+							onChange={formik.handleChange}
+							error={formik.touched.newSubProductName && Boolean(formik.errors.newSubProductName)}
+							helperText={formik.touched.newSubProductName && formik.errors.newSubProductName}
+						/>
+					</form>
 				</DialogContent>
-				<DialogActions>
+				<DialogActions sx={{ background: '#ebebeb', display: 'flex', justifyContent: 'space-between' }}>
 					<Button onClick={handleDialogClose} color="primary">
 						Cancel
 					</Button>
-					<Button onClick={handleAddSubProduct} color="primary">
+					<Button onClick={formik.submitForm} color="primary">
 						Add
 					</Button>
 				</DialogActions>
