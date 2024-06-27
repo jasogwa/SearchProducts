@@ -29,6 +29,7 @@ import {
 	DialogTitle,
 	Dialog
 } from '@mui/material';
+import StyledTextField from './StyledTextField';
 
 interface SubCategoryProps {
 	subCategoryId: number;
@@ -64,10 +65,7 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
 	const filteredSubProducts = useMemo(() => {
-		return subProducts.filter(
-			(subProduct) => subProduct.subProductName.toLowerCase()
-				.includes(subProductSearchTerm.toLowerCase())
-		);
+		return subProducts.filter((subProduct) => subProduct.subProductName.toLowerCase().includes(subProductSearchTerm.toLowerCase()));
 	}, [subProducts, subProductSearchTerm]);
 
 	const handleSubProductSelect = useCallback((subProductId: number) => {
@@ -79,9 +77,7 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 
 	useEffect(() => {
 		if (!isSelected) {
-			setSelectedSubProducts((prev) => prev.filter(
-				(id) => !subProducts.map((subProduct) => subProduct.subProductId).includes(id))
-			);
+			setSelectedSubProducts((prev) => prev.filter((id) => !subProducts.map((subProduct) => subProduct.subProductId).includes(id)));
 		}
 	}, [isSelected, setSelectedSubProducts, subProducts]);
 
@@ -174,26 +170,10 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 						</Typography>
 					</div>
 					<CardContent sx={{ background: '#e9e9e9' }}>
-						<TextField
+						<StyledTextField
 							label="Search"
 							fullWidth
 							margin="normal"
-							sx={{
-								background: '#fff',
-								'& .MuiOutlinedInput-root': {
-									padding: '8px',
-									'& fieldset': {
-										border: 'none'
-									}
-								},
-								'& .MuiInputBase-input': {
-									height: '1.2em',
-									padding: '6px'
-								},
-								'& .MuiInputLabel-root': {
-									top: '-6px'
-								}
-							}}
 							value={subProductSearchTerm}
 							onChange={handleSubProductSearchChange}
 						/>
@@ -229,10 +209,23 @@ const SubCategory: React.FC<SubCategoryProps> = ({
 						<TextField
 							autoFocus
 							margin="dense"
-							label="Sub Product Name"
+							label="Enter Sub Product Name"
 							fullWidth
 							id="newSubProductName"
 							name="newSubProductName"
+							sx={{
+								background: '#fff',
+								'& .MuiOutlinedInput-root': {
+									padding: '8px',
+									'& fieldset': {
+										border: '1px dotted #f2f2f2'
+									}
+								},
+								'& .MuiInputBase-input': {
+									height: '1.2em',
+									padding: '6px'
+								}
+							}}
 							value={formik.values.newSubProductName}
 							onChange={formik.handleChange}
 							error={formik.touched.newSubProductName && Boolean(formik.errors.newSubProductName)}

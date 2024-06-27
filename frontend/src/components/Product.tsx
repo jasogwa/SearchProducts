@@ -7,19 +7,10 @@ import { RootState } from '../store';
 import SubCategory from './SubCategory';
 import { selectSubCategoriesByProductId } from '../selectors';
 import StyledButton from './StyledButton';
+import StyledTextField from './StyledTextField';
 
-// material ui 
-import {
-	Card,
-	CardContent,
-	Typography,
-	Checkbox,
-	Collapse,
-	List,
-	TextField,
-	CardActions,
-	ListItem
-} from '@mui/material';
+// material ui
+import { Card, CardContent, Typography, Checkbox, Collapse, List, CardActions, ListItem } from '@mui/material';
 
 interface ProductProps {
 	productId: number;
@@ -141,29 +132,7 @@ const Product: React.FC<ProductProps> = ({
 							</Typography>
 						</div>
 						<CardContent sx={{ background: '#e7e4e4' }}>
-							<TextField
-								label="Search"
-								fullWidth
-								margin="normal"
-								sx={{
-									background: '#fff',
-									'& .MuiOutlinedInput-root': {
-										padding: '8px',
-										'& fieldset': {
-											border: 'none'
-										}
-									},
-									'& .MuiInputBase-input': {
-										height: '1.2em',
-										padding: '6px'
-									},
-									'& .MuiInputLabel-root': {
-										top: '-6px'
-									}
-								}}
-								value={searchTerm}
-								onChange={handleSearchTermChange}
-							/>
+							<StyledTextField label="Search" fullWidth margin="normal" value={searchTerm} onChange={handleSearchTermChange} />
 							<List>
 								{filteredSubCategories.map((subCategory, index) => (
 									<SubCategory
